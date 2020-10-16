@@ -6,13 +6,13 @@ This plugin is FAR from complete. Once it is done (and after I get MegaPvP's per
 
 # Features
 
-###Commands:
+### Commands:
   - Soup: Get a list of the subcommands for the soup core.
   - SetSoupSpawn: Set the spawnpoint for the server.
   - Help: Get the help for the server.
   - More coming soon...
   
-###Listeners:
+### Listeners:
   - A Kit selector GUI.
   - A Help item that is binded with the /help command.
   - Login events, that sets the players spawnpoint, clears their inventory, kit, and gives them the spawn items.

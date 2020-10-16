@@ -1,6 +1,7 @@
 package me.yochran.invadedsoup.listeners;
 
 import me.yochran.invadedsoup.utils.Utils;
+import me.yochran.invadedsoup.utils.XMaterial;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +14,7 @@ public class HelpItemListener implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (player.getInventory().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&6Help &7(Right Click&7)"))) {
+        if (event.getItem().getType() == XMaterial.PAPER.parseMaterial()) {
             if (event.getAction() == Action.RIGHT_CLICK_AIR) {
                 Utils.sendMessage(player, "&7This is a &6Soup &7server, all kits are temporary and can he selected again after you die.");
                 Utils.sendMessage(player, "&7Right click the &bKit Selector &7to get started.");

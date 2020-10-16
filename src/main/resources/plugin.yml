@@ -2,6 +2,7 @@ name: InvadedSoup
 version: ${project.version}
 main: me.yochran.invadedsoup.InvadedSoup
 api-version: 1.16
+depend: [WorldGuard, WorldEdit]
 authors: [Yochran]
 description: A replica of InvadedLand's soup core.
 commands:

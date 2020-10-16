@@ -1,6 +1,13 @@
 package me.yochran.invadedsoup.utils;
 
 import com.google.common.io.ByteStreams;
+import com.sk89q.worldedit.Vector;
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.bukkit.WGBukkit;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import me.yochran.invadedsoup.InvadedSoup;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -10,8 +17,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 public class Utils {
+
+    private static InvadedSoup plugin;
+
+    public Utils() {
+        plugin = InvadedSoup.getPlugin(InvadedSoup.class);
+    }
 
     public static void sendMessage(Player player, String message) {
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
@@ -44,6 +58,21 @@ public class Utils {
 
     public static void guiLiner() {
         ChatColor.translateAlternateColorCodes('&', "&7&m-------------------------");
+    }
+
+    public static boolean regionLeave(Player player){
+        for (ProtectedRegion wgregion : WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation())) {
+            ArrayList<String> tr = new ArrayList<>();
+            ArrayList<String> regions = new ArrayList<>();
+            regions.add("spawn");
+            for(String region : regions){
+                tr.add(region);
+            }
+            if (tr.contains(wgregion.getId().toLowerCase())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static File loadData(Plugin plugin, String resource) {

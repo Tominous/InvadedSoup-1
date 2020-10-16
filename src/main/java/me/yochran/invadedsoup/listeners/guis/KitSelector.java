@@ -21,14 +21,13 @@ public class KitSelector implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (player.getInventory().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&bKit Selector"))) {
+        if (event.getItem().getType() == XMaterial.NETHER_STAR.parseMaterial()) {
             if (event.getAction() == Action.RIGHT_CLICK_AIR) {
                 Inventory kitInv = Bukkit.createInventory(player, 18, ChatColor.AQUA + "Kit Selector");
-
                 // Kits
                 ItemStack pvp = XMaterial.MUSHROOM_STEW.parseItem();
-                ItemStack potion = XMaterial.POTION.parseItem();
-                ItemStack archer = XMaterial.MUSHROOM_STEW.parseItem();
+                ItemStack potion = new ItemStack(Material.POTION, 1, (short) 16421);
+                ItemStack archer = XMaterial.BOW.parseItem();
                 ItemStack switcher = XMaterial.SNOWBALL.parseItem();
                 ItemStack urgal = XMaterial.BLAZE_POWDER.parseItem();
                 ItemStack sonic = XMaterial.SUGAR.parseItem();
@@ -80,7 +79,6 @@ public class KitSelector implements Listener {
                 pvpLore.add(ChatColor.translateAlternateColorCodes('&', "&7The standard kit, for standard people."));
 
                 ArrayList<String> potionLore = new ArrayList<>();
-                potionLore.add(ChatColor.translateAlternateColorCodes('&', "&7Instant Health"));
                 potionLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
                 potionLore.add(Utils.guiSpacer());
                 potionLore.add(ChatColor.translateAlternateColorCodes('&', "&7Use potions instead of soups."));

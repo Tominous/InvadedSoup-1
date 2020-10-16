@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,8 @@ public class PlayerLogListeners implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        player.setHealth(20.0);
+        player.setFoodLevel(20);
         player.getInventory().clear();
         player.getInventory().setHelmet(null);
         player.getInventory().setChestplate(null);
@@ -39,7 +42,7 @@ public class PlayerLogListeners implements Listener {
         }, 1);
         Inventory playerInv = player.getInventory();
         ItemStack kitSelector = XMaterial.NETHER_STAR.parseItem();
-        ItemStack help = XMaterial.MUSHROOM_STEW.parseItem();
+        ItemStack help = XMaterial.PAPER.parseItem();
         ItemStack settings = XMaterial.BOOK.parseItem();
 
         ItemMeta kitSelectorName = kitSelector.getItemMeta();
@@ -60,5 +63,7 @@ public class PlayerLogListeners implements Listener {
         playerInv.setItem(0, help);
         playerInv.setItem(4, kitSelector);
         playerInv.setItem(8, settings);
+        player.removePotionEffect(PotionEffectType.SPEED);
+        plugin.kit.remove(player.getUniqueId());
     }
 }

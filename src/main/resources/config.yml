@@ -1,0 +1,10 @@
+# InvadedLands Soup core replica by Yochran. (1.0)
+# https://github.com/Yochran
+
+Spawn:
+  world: world
+  x: 0.5
+  y: 70
+  z: 0.5
+  pitch: -135
+  yaw: 0

@@ -24,25 +24,29 @@ public class PotionKit implements Listener {
     public void selectKit(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         if (event.getView().getTitle().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&bKit Selector"))) {
-            if (event.getCurrentItem().getType() == Material.POTION) {
-                event.setCancelled(true);
-                player.getInventory().clear();
-                plugin.kit.remove(player.getUniqueId());
-                ItemStack sword = XMaterial.IRON_SWORD.parseItem();
-                ItemStack potion = new ItemStack(Material.POTION, 1, (short) 16421);
-                sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-                player.getInventory().setItem(0, sword);
-                for (int i = 1; i < 36; i++) {
-                    player.getInventory().setItem(i, potion);
-                }
-                player.closeInventory();
-                player.getInventory().setHelmet(XMaterial.LEATHER_HELMET.parseItem());
-                player.getInventory().setChestplate(XMaterial.IRON_CHESTPLATE.parseItem());
-                player.getInventory().setLeggings(XMaterial.IRON_LEGGINGS.parseItem());
-                player.getInventory().setBoots(XMaterial.IRON_BOOTS.parseItem());
+            if (event.getCurrentItem()== null) {
+                return;
+            } else {
+                if (event.getCurrentItem().getType() == Material.POTION) {
+                    event.setCancelled(true);
+                    player.getInventory().clear();
+                    plugin.kit.remove(player.getUniqueId());
+                    ItemStack sword = XMaterial.IRON_SWORD.parseItem();
+                    ItemStack potion = new ItemStack(Material.POTION, 1, (short) 16421);
+                    sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+                    player.getInventory().setItem(0, sword);
+                    for (int i = 1; i < 36; i++) {
+                        player.getInventory().setItem(i, potion);
+                    }
+                    player.closeInventory();
+                    player.getInventory().setHelmet(XMaterial.LEATHER_HELMET.parseItem());
+                    player.getInventory().setChestplate(XMaterial.IRON_CHESTPLATE.parseItem());
+                    player.getInventory().setLeggings(XMaterial.IRON_LEGGINGS.parseItem());
+                    player.getInventory().setBoots(XMaterial.IRON_BOOTS.parseItem());
 
-                Utils.sendMessage(player, "&7You have recieved the &2Potion &7Kit.");
-                plugin.kit.put(player.getUniqueId(), "Potion");
+                    Utils.sendMessage(player, "&7You have recieved the &2Potion &7Kit.");
+                    plugin.kit.put(player.getUniqueId(), "Potion");
+                }
             }
         }
     }

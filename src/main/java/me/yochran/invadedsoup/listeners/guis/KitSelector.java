@@ -21,7 +21,7 @@ public class KitSelector implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (event.getItem().getType() == XMaterial.NETHER_STAR.parseMaterial()) {
+        if (player.getItemInHand().getType() == XMaterial.NETHER_STAR.parseMaterial()) {
             if (event.getAction() == Action.RIGHT_CLICK_AIR) {
                 Inventory kitInv = Bukkit.createInventory(player, 18, ChatColor.AQUA + "Kit Selector");
                 // Kits

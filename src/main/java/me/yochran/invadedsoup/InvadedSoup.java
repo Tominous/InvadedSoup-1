@@ -33,7 +33,6 @@ public final class InvadedSoup extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        startupAnnouncements();
         registerCommands();
         registerEvents();
         runRunnables();
@@ -41,6 +40,7 @@ public final class InvadedSoup extends JavaPlugin {
         registerData();
         getKits();
         worldGuardPlugin = getWorldGuard();
+        startupAnnouncements();
     }
 
     @Override
@@ -111,8 +111,11 @@ public final class InvadedSoup extends JavaPlugin {
         if (!file.exists()) {
             Utils.loadData(this, name); }
 
-        try { fileConfig.load(file); }
-        catch (Exception e3) { e3.printStackTrace(); }
+        try {
+            fileConfig.load(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         for(String priceString : fileConfig.getKeys(false)) {
             fileConfig.set(priceString, fileConfig.getString(priceString));

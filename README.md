@@ -16,6 +16,8 @@ This plugin is FAR from complete. Once it is done (and after I get MegaPvP's per
   - A Kit selector GUI.
   - A Help item that is binded with the /help command.
   - Login events, that sets the players spawnpoint, clears their inventory, kit, and gives them the spawn items.
+  - Custom Kit GUI  that has a bunch of kits you can choose from.
+  - Custom help listener, when you right click the item it displays the help page.
   - More coming soon...
   
 The original InvadedLands soup server core was created by MegaPVP, this is simply a replica.

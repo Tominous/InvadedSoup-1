@@ -48,6 +48,7 @@ public class SonicKit implements Listener {
 
                     Utils.sendMessage(player, "&7You have recieved the &8Sonic &7Kit.");
                     plugin.kit.put(player.getUniqueId(), "Sonic");
+                    plugin.potion.remove(player.getUniqueId());
                 }
             }
         }

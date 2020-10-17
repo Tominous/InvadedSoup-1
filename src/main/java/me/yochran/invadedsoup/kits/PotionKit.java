@@ -24,7 +24,7 @@ public class PotionKit implements Listener {
     public void selectKit(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         if (event.getView().getTitle().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&bKit Selector"))) {
-            if (event.getCurrentItem()== null) {
+            if (event.getCurrentItem() == null) {
                 return;
             } else {
                 if (event.getCurrentItem().getType() == Material.POTION) {
@@ -46,6 +46,7 @@ public class PotionKit implements Listener {
 
                     Utils.sendMessage(player, "&7You have recieved the &2Potion &7Kit.");
                     plugin.kit.put(player.getUniqueId(), "Potion");
+                    plugin.potion.add(player.getUniqueId());
                 }
             }
         }

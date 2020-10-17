@@ -45,6 +45,7 @@ public class PvPKit implements Listener {
 
                     Utils.sendMessage(player, "&7You have recieved the &aPvP &7Kit.");
                     plugin.kit.put(player.getUniqueId(), "PvP");
+                    plugin.potion.remove(player.getUniqueId());
                 }
             }
         }

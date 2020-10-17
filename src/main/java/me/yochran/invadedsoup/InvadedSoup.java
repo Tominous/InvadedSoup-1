@@ -6,19 +6,17 @@ import me.yochran.invadedsoup.commands.InfoCommand;
 import me.yochran.invadedsoup.commands.SetSpawnCommand;
 import me.yochran.invadedsoup.data.UDat;
 import me.yochran.invadedsoup.kits.*;
-import me.yochran.invadedsoup.listeners.HealthFoodChangeEvents;
-import me.yochran.invadedsoup.listeners.HelpItemListener;
-import me.yochran.invadedsoup.listeners.PlayerLogListeners;
-import me.yochran.invadedsoup.listeners.SpawnLeaveEvent;
+import me.yochran.invadedsoup.listeners.*;
 import me.yochran.invadedsoup.listeners.guis.KitSelector;
+import me.yochran.invadedsoup.runnables.PotionRunnable;
 import me.yochran.invadedsoup.utils.Utils;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -58,10 +56,8 @@ public final class InvadedSoup extends JavaPlugin {
         return (WorldGuardPlugin) plugin;
     }
 
-    public ArrayList<Location> spawn = new ArrayList<>();
     public HashMap<UUID, String> kit = new HashMap<>();
-    public ArrayList<UUID> entered = new ArrayList<>();
-    public ArrayList<UUID> left = new ArrayList<>();
+    public ArrayList<UUID> potion = new ArrayList<>();
 
     private void startupAnnouncements() {
         System.out.println(ChatColor.GREEN + "[Soup]: InvadedLands soup core v1.0 by Yochran is loading...");
@@ -86,6 +82,7 @@ public final class InvadedSoup extends JavaPlugin {
         manager.registerEvents(new HelpItemListener(), this);
         manager.registerEvents(new HealthFoodChangeEvents(), this);
         manager.registerEvents(new SpawnLeaveEvent(), this);
+        manager.registerEvents(new SoupListener(), this);
     }
 
     private void getKits() {
@@ -101,7 +98,7 @@ public final class InvadedSoup extends JavaPlugin {
     }
 
     private void runRunnables() {
-
+        new PotionRunnable().runTaskTimer(this, 0, 1);
     }
 
     public void loadFile(String name){

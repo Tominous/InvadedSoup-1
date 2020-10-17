@@ -65,5 +65,6 @@ public class PlayerLogListeners implements Listener {
         playerInv.setItem(8, settings);
         player.removePotionEffect(PotionEffectType.SPEED);
         plugin.kit.remove(player.getUniqueId());
+        plugin.potion.remove(player.getUniqueId());
     }
 }

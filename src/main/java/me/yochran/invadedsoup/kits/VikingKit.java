@@ -44,6 +44,7 @@ public class VikingKit implements Listener {
 
                     Utils.sendMessage(player, "&7You have recieved the &6Viking &7Kit.");
                     plugin.kit.put(player.getUniqueId(), "Viking");
+                    plugin.potion.remove(player.getUniqueId());
                 }
             }
         }

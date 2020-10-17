@@ -1,44 +1,60 @@
 package me.yochran.invadedsoup.listeners;
 
-import com.sun.jdi.connect.Connector;
 import me.yochran.invadedsoup.InvadedSoup;
 import me.yochran.invadedsoup.management.SpawnManagement;
 import me.yochran.invadedsoup.utils.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
-public class PlayerLogListeners implements Listener {
+public class RespawnEvent implements Listener {
 
     private InvadedSoup plugin;
 
-    public PlayerLogListeners() {
+    public RespawnEvent() {
         plugin = InvadedSoup.getPlugin(InvadedSoup.class);
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        event.getDrops().clear();
+        World world = player.getWorld();
+        ItemStack soupItem = XMaterial.MUSHROOM_STEW.parseItem();
+        if (player.getInventory().contains(XMaterial.MUSHROOM_STEW.parseItem())) {
+            for (ItemStack soup : player.getInventory().getContents()) {
+                world.dropItemNaturally(player.getLocation(), soupItem);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-        player.setHealth(20.0);
-        player.setFoodLevel(20);
-        player.getInventory().clear();
-        player.getInventory().setHelmet(null);
-        player.getInventory().setChestplate(null);
-        player.getInventory().setLeggings(null);
-        player.getInventory().setBoots(null);
+        plugin.kit.remove(player.getUniqueId());
+        plugin.switcher.remove(player.getUniqueId());
+        plugin.urgal.remove(player.getUniqueId());
+        plugin.potion.remove(player.getUniqueId());
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            SpawnManagement login = new SpawnManagement(player);
-            login.tp();
+            SpawnManagement respawn = new SpawnManagement(player);
+            respawn.tp();
         }, 1);
         Inventory playerInv = player.getInventory();
         ItemStack kitSelector = XMaterial.NETHER_STAR.parseItem();
@@ -64,9 +80,5 @@ public class PlayerLogListeners implements Listener {
         playerInv.setItem(4, kitSelector);
         playerInv.setItem(8, settings);
         player.removePotionEffect(PotionEffectType.SPEED);
-        plugin.kit.remove(player.getUniqueId());
-        plugin.potion.remove(player.getUniqueId());
-        plugin.urgal.remove(player.getUniqueId());
-        plugin.switcher.remove(player.getUniqueId());
     }
 }

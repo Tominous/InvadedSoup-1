@@ -1,24 +1,22 @@
 package me.yochran.invadedsoup;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import me.yochran.invadedsoup.commands.HelpCommand;
-import me.yochran.invadedsoup.commands.InfoCommand;
-import me.yochran.invadedsoup.commands.SetSpawnCommand;
+import me.yochran.invadedsoup.commands.*;
 import me.yochran.invadedsoup.data.UDat;
 import me.yochran.invadedsoup.kits.*;
 import me.yochran.invadedsoup.listeners.*;
 import me.yochran.invadedsoup.listeners.guis.KitSelector;
+import me.yochran.invadedsoup.listeners.kitlisteners.SwitcherAbility;
+import me.yochran.invadedsoup.listeners.kitlisteners.UrgalAbility;
 import me.yochran.invadedsoup.runnables.PotionRunnable;
-import me.yochran.invadedsoup.utils.Utils;
+import me.yochran.invadedsoup.runnables.SpawnRunnable;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.Location;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -57,7 +55,13 @@ public final class InvadedSoup extends JavaPlugin {
     }
 
     public HashMap<UUID, String> kit = new HashMap<>();
+    public HashMap<UUID, Integer> spawn = new HashMap<>();
+    public HashMap<UUID, Double> X = new HashMap<>();
+    public HashMap<UUID, Double> Z = new HashMap<>();
+    public ArrayList<UUID> dropsOn = new ArrayList<>();
     public ArrayList<UUID> potion = new ArrayList<>();
+    public ArrayList<UUID> urgal = new ArrayList<>();
+    public ArrayList<UUID> switcher = new ArrayList<>();
 
     private void startupAnnouncements() {
         System.out.println(ChatColor.GREEN + "[Soup]: InvadedLands soup core v1.0 by Yochran is loading...");
@@ -73,6 +77,8 @@ public final class InvadedSoup extends JavaPlugin {
         getCommand("soup").setExecutor(new InfoCommand());
         getCommand("setsoupspawn").setExecutor(new SetSpawnCommand());
         getCommand("help").setExecutor(new HelpCommand());
+        getCommand("toggledrops").setExecutor(new ToggleDropsCommand());
+        getCommand("spawn").setExecutor(new SpawnCommand());
     }
 
     private void registerEvents() {
@@ -83,6 +89,9 @@ public final class InvadedSoup extends JavaPlugin {
         manager.registerEvents(new HealthFoodChangeEvents(), this);
         manager.registerEvents(new SpawnLeaveEvent(), this);
         manager.registerEvents(new SoupListener(), this);
+        manager.registerEvents(new UrgalAbility(), this);
+        manager.registerEvents(new SwitcherAbility(), this);
+        manager.registerEvents(new RespawnEvent(), this);
     }
 
     private void getKits() {
@@ -99,26 +108,8 @@ public final class InvadedSoup extends JavaPlugin {
 
     private void runRunnables() {
         new PotionRunnable().runTaskTimer(this, 0, 1);
+        new SpawnRunnable().runTaskTimer(this, 0, 20);
     }
-
-    public void loadFile(String name){
-        File file = new File(getDataFolder(), name);
-        FileConfiguration fileConfig = YamlConfiguration.loadConfiguration(file);
-
-        if (!file.exists()) {
-            Utils.loadData(this, name); }
-
-        try {
-            fileConfig.load(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        for(String priceString : fileConfig.getKeys(false)) {
-            fileConfig.set(priceString, fileConfig.getString(priceString));
-        }
-    }
-
 
     private void registerData(){
         data = new UDat();

@@ -51,6 +51,8 @@ public class UrgalKit implements Listener {
 
                     Utils.sendMessage(player, "&7You have recieved the &bUrgal &7Kit.");
                     plugin.kit.put(player.getUniqueId(), "Urgal");
+                    plugin.urgal.add(player.getUniqueId());
+                    plugin.switcher.remove(player.getUniqueId());
                     plugin.potion.remove(player.getUniqueId());
                 }
             }

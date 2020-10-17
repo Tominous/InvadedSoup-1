@@ -12,7 +12,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class SoupListener implements Listener {
 
@@ -85,14 +84,99 @@ public class SoupListener implements Listener {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     item.remove();
                     player.updateInventory();
-                }, 5);
+                }, 1);
                 return;
             }
+            case DIAMOND_AXE:
+            case IRON_AXE:
+            case BOW:
+            case ARROW:
+            case SNOWBALL:
+            case FISHING_ROD:
+            case MUSHROOM_STEW:
             case STONE_SWORD:
             case IRON_SWORD:
             case DIAMOND_SWORD: {
+                if (!plugin.dropsOn.contains(player.getUniqueId())) {
+                    event.setCancelled(true);
+                    player.updateInventory();
+                    return;
+                } else {
+                    return;
+                }
+            }
+            case NETHER_STAR:
+            case PAPER:
+            case BOOK: {
                 event.setCancelled(true);
-                return;
+                player.updateInventory();
+            }
+            case DIAMOND_HELMET:
+            case CHAINMAIL_HELMET:
+            case GOLDEN_HELMET:
+            case IRON_HELMET:
+            case LEATHER_HELMET: {
+                if (!plugin.dropsOn.contains(player.getUniqueId())) {
+                    player.getInventory().setHelmet(item.getItemStack());
+                    player.updateInventory();
+                    item.remove();
+                    return;
+                } else {
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        item.remove();
+                        player.updateInventory();
+                    }, 1);
+                }
+            }
+            case CHAINMAIL_CHESTPLATE:
+            case DIAMOND_CHESTPLATE:
+            case GOLDEN_CHESTPLATE:
+            case IRON_CHESTPLATE:
+            case LEATHER_CHESTPLATE: {
+                if (!plugin.dropsOn.contains(player.getUniqueId())) {
+                    player.getInventory().setChestplate(item.getItemStack());
+                    player.updateInventory();
+                    item.remove();
+                    return;
+                } else {
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        item.remove();
+                        player.updateInventory();
+                    }, 1);
+                }
+            }
+            case LEATHER_LEGGINGS:
+            case CHAINMAIL_LEGGINGS:
+            case DIAMOND_LEGGINGS:
+            case GOLDEN_LEGGINGS:
+            case IRON_LEGGINGS: {
+                if (!plugin.dropsOn.contains(player.getUniqueId())) {
+                    player.getInventory().setLeggings(item.getItemStack());
+                    player.updateInventory();
+                    item.remove();
+                    return;
+                } else {
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        item.remove();
+                        player.updateInventory();
+                    }, 1);
+                }
+            }
+            case CHAINMAIL_BOOTS:
+            case DIAMOND_BOOTS:
+            case GOLDEN_BOOTS:
+            case IRON_BOOTS:
+            case LEATHER_BOOTS: {
+                if (!plugin.dropsOn.contains(player.getUniqueId())) {
+                    player.getInventory().setBoots(item.getItemStack());
+                    player.updateInventory();
+                    item.remove();
+                } else {
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        item.remove();
+                        player.updateInventory();
+                    }, 1);
+                }
             }
         }
     }

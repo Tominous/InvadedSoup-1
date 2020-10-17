@@ -52,6 +52,8 @@ public class ArcherKit implements Listener {
                     Utils.sendMessage(player, "&7You have recieved the &bArcher &7Kit.");
                     plugin.kit.put(player.getUniqueId(), "Archer");
                     plugin.potion.remove(player.getUniqueId());
+                    plugin.urgal.remove(player.getUniqueId());
+                    plugin.switcher.remove(player.getUniqueId());
                 }
             }
         }

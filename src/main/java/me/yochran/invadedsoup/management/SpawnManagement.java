@@ -13,13 +13,15 @@ import java.io.File;
 public class SpawnManagement {
 
     private Player player;
+
     private InvadedSoup plugin;
+
     public SpawnManagement(Player player){
         plugin = InvadedSoup.getPlugin(InvadedSoup.class);
         this.player = player;
     }
 
-    public void send(){
+    public void tp() {
         File file = new File(plugin.getDataFolder(), "config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 

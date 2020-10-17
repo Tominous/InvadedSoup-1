@@ -11,6 +11,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class PotionKit implements Listener {
 
@@ -46,7 +48,10 @@ public class PotionKit implements Listener {
 
                     Utils.sendMessage(player, "&7You have recieved the &2Potion &7Kit.");
                     plugin.kit.put(player.getUniqueId(), "Potion");
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000000, 0));
                     plugin.potion.add(player.getUniqueId());
+                    plugin.urgal.remove(player.getUniqueId());
+                    plugin.switcher.remove(player.getUniqueId());
                 }
             }
         }

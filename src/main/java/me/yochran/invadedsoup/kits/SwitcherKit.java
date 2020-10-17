@@ -56,6 +56,8 @@ public class SwitcherKit implements Listener {
                     Utils.sendMessage(player, "&7You have recieved the &4Switcher &7Kit.");
                     plugin.kit.put(player.getUniqueId(), "Switcher");
                     plugin.potion.remove(player.getUniqueId());
+                    plugin.urgal.remove(player.getUniqueId());
+                    plugin.switcher.add(player.getUniqueId());
                 }
             }
         }

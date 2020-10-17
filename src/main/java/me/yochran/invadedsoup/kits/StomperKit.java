@@ -46,6 +46,8 @@ public class StomperKit implements Listener {
                     Utils.sendMessage(player, "&7You have recieved the &3Stomper &7Kit.");
                     plugin.kit.put(player.getUniqueId(), "Stomper");
                     plugin.potion.remove(player.getUniqueId());
+                    plugin.urgal.remove(player.getUniqueId());
+                    plugin.switcher.remove(player.getUniqueId());
                 }
             }
         }

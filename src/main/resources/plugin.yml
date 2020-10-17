@@ -17,3 +17,10 @@ commands:
   Help:
     description: Gets the soup cores help for normal players.
     usage: /<command>
+  ToggleDrops:
+    description: Toggle off or on item drops.
+    usage: /<command>
+    aliases: tdp
+  Spawn:
+    description: Teleport a player to spawn.
+    usage: /<command>

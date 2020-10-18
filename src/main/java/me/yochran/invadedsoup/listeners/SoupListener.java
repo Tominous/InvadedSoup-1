@@ -4,6 +4,8 @@ import me.yochran.invadedsoup.InvadedSoup;
 import me.yochran.invadedsoup.utils.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,6 +14,9 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
+import java.io.File;
 
 public class SoupListener implements Listener {
 
@@ -78,105 +83,43 @@ public class SoupListener implements Listener {
     public void onDrop(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
         Item item = event.getItemDrop();
-        Material type = item.getItemStack().getType();
-        switch (type) {
-            case BOWL: {
-                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    item.remove();
-                    player.updateInventory();
-                }, 1);
-                return;
-            }
-            case DIAMOND_AXE:
-            case IRON_AXE:
-            case BOW:
-            case ARROW:
-            case SNOWBALL:
-            case FISHING_ROD:
-            case MUSHROOM_STEW:
-            case STONE_SWORD:
-            case IRON_SWORD:
-            case DIAMOND_SWORD: {
-                if (!plugin.dropsOn.contains(player.getUniqueId())) {
-                    event.setCancelled(true);
-                    player.updateInventory();
+        Material type = event.getItemDrop().getItemStack().getType();
+        if (plugin.kit.containsKey(player.getUniqueId())) {
+            if (!plugin.dropsOn.contains(player.getUniqueId())) {
+                if (type == XMaterial.DIAMOND_HELMET.parseMaterial() || type == XMaterial.GOLDEN_HELMET.parseMaterial() || type == XMaterial.CHAINMAIL_HELMET.parseMaterial() || type == XMaterial.IRON_HELMET.parseMaterial() || type == XMaterial.LEATHER_HELMET.parseMaterial()) {
+                    player.getInventory().setHelmet(item.getItemStack());
+                    event.getItemDrop().remove();
+                } else if (type == XMaterial.DIAMOND_CHESTPLATE.parseMaterial() || type == XMaterial.GOLDEN_CHESTPLATE.parseMaterial() || type == XMaterial.CHAINMAIL_CHESTPLATE.parseMaterial() || type == XMaterial.IRON_CHESTPLATE.parseMaterial() || type == XMaterial.LEATHER_CHESTPLATE.parseMaterial()) {
+                    player.getInventory().setChestplate(item.getItemStack());
+                    event.getItemDrop().remove();
+                } else if (type == XMaterial.DIAMOND_LEGGINGS.parseMaterial() || type == XMaterial.GOLDEN_LEGGINGS.parseMaterial() || type == XMaterial.CHAINMAIL_LEGGINGS.parseMaterial() || type == XMaterial.IRON_LEGGINGS.parseMaterial()|| type == XMaterial.LEATHER_LEGGINGS.parseMaterial()) {
+                    player.getInventory().setLeggings(item.getItemStack());
+                    event.getItemDrop().remove();
+                } else if (type == XMaterial.DIAMOND_BOOTS.parseMaterial() || type == XMaterial.GOLDEN_BOOTS.parseMaterial() || type == XMaterial.CHAINMAIL_BOOTS.parseMaterial() || type == XMaterial.IRON_BOOTS.parseMaterial() || type == XMaterial.LEATHER_BOOTS.parseMaterial()) {
+                    player.getInventory().setBoots(item.getItemStack());
+                    event.getItemDrop().remove();
+                } else {
+                    if (type == XMaterial.BOWL.parseMaterial()) {
+                        event.getItemDrop().remove();
+                    } else {
+                        event.setCancelled(true);
+                    }
+                }
+                player.updateInventory();
+            } else {
+                if (type == XMaterial.MUSHROOM_STEW.parseMaterial()) {
                     return;
                 } else {
-                    return;
+                    event.getItemDrop().remove();
                 }
             }
-            case NETHER_STAR:
-            case PAPER:
-            case BOOK: {
+        } else {
+            File file = new File(plugin.getDataFolder(), "config.yml");
+            FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+            String worldname = config.getString("Spawn.world");
+            if (player.getWorld().getName().equalsIgnoreCase(worldname)) {
                 event.setCancelled(true);
                 player.updateInventory();
-            }
-            case DIAMOND_HELMET:
-            case CHAINMAIL_HELMET:
-            case GOLDEN_HELMET:
-            case IRON_HELMET:
-            case LEATHER_HELMET: {
-                if (!plugin.dropsOn.contains(player.getUniqueId())) {
-                    player.getInventory().setHelmet(item.getItemStack());
-                    player.updateInventory();
-                    item.remove();
-                    return;
-                } else {
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        item.remove();
-                        player.updateInventory();
-                    }, 1);
-                }
-            }
-            case CHAINMAIL_CHESTPLATE:
-            case DIAMOND_CHESTPLATE:
-            case GOLDEN_CHESTPLATE:
-            case IRON_CHESTPLATE:
-            case LEATHER_CHESTPLATE: {
-                if (!plugin.dropsOn.contains(player.getUniqueId())) {
-                    player.getInventory().setChestplate(item.getItemStack());
-                    player.updateInventory();
-                    item.remove();
-                    return;
-                } else {
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        item.remove();
-                        player.updateInventory();
-                    }, 1);
-                }
-            }
-            case LEATHER_LEGGINGS:
-            case CHAINMAIL_LEGGINGS:
-            case DIAMOND_LEGGINGS:
-            case GOLDEN_LEGGINGS:
-            case IRON_LEGGINGS: {
-                if (!plugin.dropsOn.contains(player.getUniqueId())) {
-                    player.getInventory().setLeggings(item.getItemStack());
-                    player.updateInventory();
-                    item.remove();
-                    return;
-                } else {
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        item.remove();
-                        player.updateInventory();
-                    }, 1);
-                }
-            }
-            case CHAINMAIL_BOOTS:
-            case DIAMOND_BOOTS:
-            case GOLDEN_BOOTS:
-            case IRON_BOOTS:
-            case LEATHER_BOOTS: {
-                if (!plugin.dropsOn.contains(player.getUniqueId())) {
-                    player.getInventory().setBoots(item.getItemStack());
-                    player.updateInventory();
-                    item.remove();
-                } else {
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        item.remove();
-                        player.updateInventory();
-                    }, 1);
-                }
             }
         }
     }

@@ -6,6 +6,8 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import me.yochran.invadedsoup.InvadedSoup;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -52,10 +54,6 @@ public class Utils {
         return null;
     }
 
-    public static void guiLiner() {
-        ChatColor.translateAlternateColorCodes('&', "&7&m-------------------------");
-    }
-
     public static boolean regionLeave(Player player){
         for (ProtectedRegion wgregion : WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation())) {
             ArrayList<String> tr = new ArrayList<>();
@@ -69,24 +67,5 @@ public class Utils {
             }
         }
         return true;
-    }
-
-    public static File loadData(Plugin plugin, String resource) {
-        File folder = plugin.getDataFolder();
-        if (!folder.exists())
-            folder.mkdir();
-        File resourceFile = new File(folder, resource);
-        try {
-            if (!resourceFile.exists()) {
-                resourceFile.createNewFile();
-                try (InputStream in = plugin.getResource(resource);
-                     OutputStream out = new FileOutputStream(resourceFile)) {
-                    ByteStreams.copy(in, out);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return resourceFile;
     }
 }

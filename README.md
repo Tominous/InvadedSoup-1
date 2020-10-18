@@ -7,22 +7,22 @@ This plugin is NOT complete. Once it is done (and after I get MegaPvP's permissi
 # Features
 
 ### Current Kits:
-  - PvP
-  - Potion
-  - Archer
-  - Switcher
-  - Urgal
-  - Sonic
-  - Viking
-  - Stomper
-  - Fisherman
-  - Kangaroo
-  - Ninja
+  - PvP (no permission required)
+  - Potion (no permission required)
+  - Archer (no permission required)
+  - Switcher (no permission required)
+  - Urgal (no permission required)
+  - Sonic (no permission required)
+  - Viking (no permission required)
+  - Stomper (no permission required)
+  - Fisherman (Permission: soup.kits.fisherman)
+  - Kangaroo (Permission: soup.kits.kangaroo)
+  - Ninja (Permission: soup.kits.ninja)
   
 ### Kits to add:
-  - Snowman
-  - Viper
-  - Thor
+  - Snowman (Permission: soup.kits.snowman)
+  - Viper (Permission: soup.kits.viper)
+  - Thor (Permission: soup.kits.thor)
 
 ### Commands:
   - Soup: Get a list of the subcommands for the soup core.

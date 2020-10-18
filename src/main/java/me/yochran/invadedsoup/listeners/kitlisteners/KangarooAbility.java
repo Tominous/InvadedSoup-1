@@ -39,7 +39,7 @@ public class KangarooAbility implements Listener {
                                 unitVector = unitVector.normalize();
                                 player.setVelocity(unitVector.multiply(1.35));
                                 if (player.getLocation().getBlock().getRelative(BlockFace.UP).getType() == XMaterial.AIR.parseMaterial()) {
-                                    plugin.kang_cooldown.put(player.getUniqueId(), 1.4);
+                                    plugin.kang_cooldown.put(player.getUniqueId(), 1.3);
                                 } else {
                                     plugin.kang_cooldown.put(player.getUniqueId(), 0.75);
                                 }
@@ -51,7 +51,11 @@ public class KangarooAbility implements Listener {
                                 org.bukkit.util.Vector unitVector = new org.bukkit.util.Vector(X, height, Z);
                                 unitVector = unitVector.normalize();
                                 player.setVelocity(unitVector.multiply(1.35));
-                                plugin.kang_cooldown.put(player.getUniqueId(), 1.0);
+                                if (player.getLocation().getBlock().getRelative(BlockFace.UP).getType() == XMaterial.AIR.parseMaterial()) {
+                                    plugin.kang_cooldown.put(player.getUniqueId(), 1.4);
+                                } else {
+                                    plugin.kang_cooldown.put(player.getUniqueId(), 1.0);
+                                }
                                 player.setSprinting(true);
                             }
                         }
@@ -71,7 +75,11 @@ public class KangarooAbility implements Listener {
                                     org.bukkit.util.Vector unitVector = new org.bukkit.util.Vector(X, height, Z);
                                     unitVector = unitVector.normalize();
                                     player.setVelocity(unitVector.multiply(1.35));
-                                    plugin.kang_cooldown.put(player.getUniqueId(), 0.75);
+                                    if (player.getLocation().getBlock().getRelative(BlockFace.UP).getType() == XMaterial.AIR.parseMaterial()) {
+                                        plugin.kang_cooldown.put(player.getUniqueId(), 1.3);
+                                    } else {
+                                        plugin.kang_cooldown.put(player.getUniqueId(), 0.75);
+                                    }
                                     player.setSprinting(true);
                                 } else {
                                     double X = player.getLocation().getDirection().getX();
@@ -80,7 +88,11 @@ public class KangarooAbility implements Listener {
                                     org.bukkit.util.Vector unitVector = new org.bukkit.util.Vector(X, height, Z);
                                     unitVector = unitVector.normalize();
                                     player.setVelocity(unitVector.multiply(1.35));
-                                    plugin.kang_cooldown.put(player.getUniqueId(), 1.0);
+                                    if (player.getLocation().getBlock().getRelative(BlockFace.UP).getType() == XMaterial.AIR.parseMaterial()) {
+                                        plugin.kang_cooldown.put(player.getUniqueId(), 1.4);
+                                    } else {
+                                        plugin.kang_cooldown.put(player.getUniqueId(), 1.0);
+                                    }
                                     player.setSprinting(true);
                                 }
                             }

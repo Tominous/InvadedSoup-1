@@ -20,3 +20,23 @@ commands:
   Spawn:
     description: Teleport a player to spawn.
     usage: /<command>
+  Message:
+    description: Message another player on the server privately.
+    usage: /<command>
+    aliases: [whisper, msg, tell, t, w]
+  Reply:
+    description: Reply to a player currently messaging you.
+    usage: /<command>
+    aliases: r
+  ToggleMessages:
+    description: Toggle on or off private messages.
+    usage: /<command>
+    aliases: [tpm, blockmsg, blockmessages, togglemsg]
+  ToggleGlobalChat:
+    description: Toggle on or off global chat.
+    usage: /<command>
+    aliases: [togglechat, tc, tgc]
+  ToggleMessageSounds:
+    description: Toggle on or off messaging sounds.
+    usage: /<command>
+    aliases: [tms, togglesounds, ts]

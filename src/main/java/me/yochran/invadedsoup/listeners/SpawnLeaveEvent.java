@@ -43,7 +43,7 @@ public class SpawnLeaveEvent implements Listener {
                         Inventory playerInv = player.getInventory();
                         ItemStack kitSelector = XMaterial.NETHER_STAR.parseItem();
                         ItemStack help = XMaterial.PAPER.parseItem();
-                        ItemStack settings = XMaterial.BOOK.parseItem();
+                        ItemStack settings = XMaterial.CLOCK.parseItem();
 
                         ItemMeta kitSelectorName = kitSelector.getItemMeta();
                         ItemMeta settingsName = settings.getItemMeta();

@@ -5,6 +5,8 @@ import me.yochran.invadedsoup.commands.*;
 import me.yochran.invadedsoup.kits.*;
 import me.yochran.invadedsoup.listeners.*;
 import me.yochran.invadedsoup.listeners.guis.KitSelector;
+import me.yochran.invadedsoup.listeners.guis.SettingsGUI;
+import me.yochran.invadedsoup.listeners.guis.SettingsOptions;
 import me.yochran.invadedsoup.listeners.kitlisteners.*;
 import me.yochran.invadedsoup.runnables.*;
 import org.bukkit.ChatColor;
@@ -48,20 +50,38 @@ public final class InvadedSoup extends JavaPlugin {
         return (WorldGuardPlugin) plugin;
     }
 
-    public HashMap<UUID, String> kit = new HashMap<>();
+    // HashMaps (Misc)
     public HashMap<UUID, Double> spawn = new HashMap<>();
     public HashMap<UUID, Integer> X = new HashMap<>();
     public HashMap<UUID, Integer> Z = new HashMap<>();
+    public HashMap<String, String> reply = new HashMap<>();
+
+    // HashMaps (Kits)
+    public HashMap<UUID, String> kit = new HashMap<>();
     public HashMap<UUID, Double> kang_cooldown = new HashMap<>();
     public HashMap<UUID, Double> ninja_cooldown = new HashMap<>();
+    public HashMap<UUID, Double> thor_cooldown = new HashMap<>();
     public HashMap<Player, Player> ninja_last_hit = new HashMap<>();
+    public HashMap<UUID, Double> viper_hit_count = new HashMap<>();
+
+    // ArrayLists (Settings)
+    public ArrayList<UUID> tpm = new ArrayList<>();
+    public ArrayList<UUID> tgc = new ArrayList<>();
+    public ArrayList<UUID> tms = new ArrayList<>();
+
+    // ArrayLists (Kits)
     public ArrayList<UUID> kangaroo = new ArrayList<>();
-    public ArrayList<UUID> dropsOn = new ArrayList<>();
     public ArrayList<UUID> potion = new ArrayList<>();
     public ArrayList<UUID> urgal = new ArrayList<>();
     public ArrayList<UUID> switcher = new ArrayList<>();
     public ArrayList<UUID> stomper = new ArrayList<>();
     public ArrayList<UUID> ninja = new ArrayList<>();
+    public ArrayList<UUID> snowman = new ArrayList<>();
+    public ArrayList<UUID> thor = new ArrayList<>();
+    public ArrayList<UUID> viper = new ArrayList<>();
+
+    // ArrayLists (Misc)
+    public ArrayList<UUID> dropsOn = new ArrayList<>();
 
     private void startupAnnouncements() {
         System.out.println(ChatColor.GREEN + "[Soup]: InvadedLands soup core v1.0 by Yochran is loading...");
@@ -78,6 +98,11 @@ public final class InvadedSoup extends JavaPlugin {
         getCommand("help").setExecutor(new HelpCommand());
         getCommand("toggledrops").setExecutor(new ToggleDropsCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
+        getCommand("message").setExecutor(new MsgCommand());
+        getCommand("reply").setExecutor(new MsgCommand());
+        getCommand("togglemessages").setExecutor(new ToggleMessages());
+        getCommand("toggleglobalchat").setExecutor(new ToggleGlobalChat());
+        getCommand("togglemessagesounds").setExecutor(new ToggleMessageSounds());
     }
 
     private void registerEvents() {
@@ -95,6 +120,12 @@ public final class InvadedSoup extends JavaPlugin {
         manager.registerEvents(new FishermanAbility(), this);
         manager.registerEvents(new KangarooAbility(), this);
         manager.registerEvents(new NinjaAbility(), this);
+        manager.registerEvents(new SnowmanAbility(), this);
+        manager.registerEvents(new ThorAbility(), this);
+        manager.registerEvents(new ViperAbility(), this);
+        manager.registerEvents(new SettingsGUI(), this);
+        manager.registerEvents(new ChatListener(), this);
+        manager.registerEvents(new SettingsOptions(), this);
     }
 
     private void getKits() {
@@ -110,6 +141,9 @@ public final class InvadedSoup extends JavaPlugin {
         kits.registerEvents(new FishermanKit(), this);
         kits.registerEvents(new KangarooKit(), this);
         kits.registerEvents(new NinjaKit(), this);
+        kits.registerEvents(new SnowmanKit(), this);
+        kits.registerEvents(new ThorKit(), this);
+        kits.registerEvents(new ViperKit(), this);
     }
 
     private void runRunnables() {
@@ -117,5 +151,6 @@ public final class InvadedSoup extends JavaPlugin {
         new SpawnRunnable().runTaskTimer(this, 0, 20);
         new KangarooCooldown().runTaskTimer(this, 0, 5);
         new NinjaCooldown().runTaskTimer(this, 0, 20);
+        new ThorCooldown().runTaskTimer(this, 0, 20);
     }
 }

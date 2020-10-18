@@ -60,7 +60,7 @@ public class SpawnRunnable extends BukkitRunnable {
                     Inventory playerInv = onlinePlayers.getInventory();
                     ItemStack kitSelector = XMaterial.NETHER_STAR.parseItem();
                     ItemStack help = XMaterial.PAPER.parseItem();
-                    ItemStack settings = XMaterial.BOOK.parseItem();
+                    ItemStack settings = XMaterial.CLOCK.parseItem();
 
                     ItemMeta kitSelectorName = kitSelector.getItemMeta();
                     ItemMeta settingsName = settings.getItemMeta();
@@ -88,6 +88,9 @@ public class SpawnRunnable extends BukkitRunnable {
                     plugin.stomper.remove(onlinePlayers.getUniqueId());
                     plugin.kangaroo.remove(onlinePlayers.getUniqueId());
                     plugin.ninja.remove(onlinePlayers.getUniqueId());
+                    plugin.snowman.remove(onlinePlayers.getUniqueId());
+                    plugin.thor.remove(onlinePlayers.getUniqueId());
+                    plugin.viper.remove(onlinePlayers.getUniqueId());
                 }
             }
         }

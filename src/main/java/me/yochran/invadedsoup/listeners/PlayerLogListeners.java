@@ -43,7 +43,7 @@ public class PlayerLogListeners implements Listener {
         Inventory playerInv = player.getInventory();
         ItemStack kitSelector = XMaterial.NETHER_STAR.parseItem();
         ItemStack help = XMaterial.PAPER.parseItem();
-        ItemStack settings = XMaterial.BOOK.parseItem();
+        ItemStack settings = XMaterial.CLOCK.parseItem();
 
         ItemMeta kitSelectorName = kitSelector.getItemMeta();
         ItemMeta settingsName = settings.getItemMeta();
@@ -71,5 +71,8 @@ public class PlayerLogListeners implements Listener {
         plugin.stomper.remove(player.getUniqueId());
         plugin.kangaroo.remove(player.getUniqueId());
         plugin.ninja.remove(player.getUniqueId());
+        plugin.snowman.remove(player.getUniqueId());
+        plugin.thor.remove(player.getUniqueId());
+        plugin.viper.remove(player.getUniqueId());
     }
 }

@@ -53,6 +53,7 @@ public class RespawnEvent implements Listener {
         plugin.stomper.remove(player.getUniqueId());
         plugin.kangaroo.remove(player.getUniqueId());
         plugin.ninja.remove(player.getUniqueId());
+        plugin.snowman.remove(player.getUniqueId());
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             SpawnManagement respawn = new SpawnManagement(player);
             respawn.tp();
@@ -60,7 +61,7 @@ public class RespawnEvent implements Listener {
         Inventory playerInv = player.getInventory();
         ItemStack kitSelector = XMaterial.NETHER_STAR.parseItem();
         ItemStack help = XMaterial.PAPER.parseItem();
-        ItemStack settings = XMaterial.BOOK.parseItem();
+        ItemStack settings = XMaterial.CLOCK.parseItem();
 
         ItemMeta kitSelectorName = kitSelector.getItemMeta();
         ItemMeta settingsName = settings.getItemMeta();
@@ -81,5 +82,7 @@ public class RespawnEvent implements Listener {
         playerInv.setItem(4, kitSelector);
         playerInv.setItem(8, settings);
         player.removePotionEffect(PotionEffectType.SPEED);
+        plugin.thor.remove(player.getUniqueId());
+        plugin.viper.remove(player.getUniqueId());
     }
 }

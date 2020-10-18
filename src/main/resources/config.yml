@@ -1,6 +1,32 @@
 # InvadedLands Soup core replica by Yochran. (1.0)
 # https://github.com/Yochran
 
+# Everything relating to /msg
+
+MsgIncorrectUsage: "&cIncorrect Usage! /msg <player> <message>"
+MsgPlayerTpm: "&cYou have private messages disabled!"
+MsgTargetTpm: "&c%player% has private messages disabled!"
+MsgToFormat: "&e(To &f%player%&e)%message%"
+MsgFromFormat: "&e(From &f%player%&e)%message%"
+PlayerNotFound: "&cThat player was not found."
+
+# Everything relating to /reply
+
+ReplyIncorrectUsage: "&c/r <message>"
+ReplyNotMessaging: "&cYou are not currently messaging anyone."
+
+# Toggle Messages
+
+ToggleOnMsg: "&aYou have enabled private messages."
+ToggleOffMsg: "&cYou have disabled private messages."
+ToggleOnChat: "&aYou have enabled global chat."
+ToggleOffChat: "&cYou have disabled global chat."
+CannotChatMsg: "&cYou cannot talk as you have global chat disabled."
+ToggleOnSounds: "&aYou have enabled messaging sounds."
+ToggleOffSounds: "&cYou have disabled messaging sounds."
+
+# Spawn Information
+
 Spawn:
   world: world
   x: 0.5

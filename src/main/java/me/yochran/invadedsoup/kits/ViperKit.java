@@ -13,11 +13,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-public class NinjaKit implements Listener {
+public class ViperKit implements Listener {
 
     private InvadedSoup plugin;
 
-    public NinjaKit() {
+    public ViperKit() {
         plugin = InvadedSoup.getPlugin(InvadedSoup.class);
     }
 
@@ -28,8 +28,8 @@ public class NinjaKit implements Listener {
             if (event.getCurrentItem()== null) {
                 return;
             } else {
-                if (event.getCurrentItem().getType() == XMaterial.GOLDEN_CARROT.parseMaterial()) {
-                    if (!player.hasPermission("soup.kits.ninja")) {
+                if (event.getCurrentItem().getType() == XMaterial.SPIDER_EYE.parseMaterial()) {
+                    if (!player.hasPermission("soup.kits.viper")) {
                         player.closeInventory();
                         Utils.sendMessage(player, "&cYou can't use that kit!");
                     } else {
@@ -39,11 +39,12 @@ public class NinjaKit implements Listener {
                         ItemStack soup = XMaterial.MUSHROOM_STEW.parseItem();
                         ItemStack sword = XMaterial.IRON_SWORD.parseItem();
                         ItemStack boots = XMaterial.LEATHER_BOOTS.parseItem();
-                        LeatherArmorMeta bootMeta = (LeatherArmorMeta) boots.getItemMeta();
-                        bootMeta.setColor(Color.BLACK);
-                        boots.setItemMeta(bootMeta);
+                        LeatherArmorMeta bootColor = (LeatherArmorMeta) boots.getItemMeta();
+                        bootColor.setColor(Color.GREEN);
+                        boots.setItemMeta(bootColor);
                         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
                         boots.addEnchantment(Enchantment.DURABILITY, 1);
+                        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
                         player.getInventory().setItem(0, sword);
                         for (int i = 1; i < 36; i++) {
                             player.getInventory().setItem(i, soup);
@@ -54,17 +55,17 @@ public class NinjaKit implements Listener {
                         player.getInventory().setLeggings(XMaterial.IRON_LEGGINGS.parseItem());
                         player.getInventory().setBoots(boots);
 
-                        Utils.sendMessage(player, "&7You have recieved the &cNinja &7Kit.");
-                        plugin.kit.put(player.getUniqueId(), "Ninja");
+                        Utils.sendMessage(player, "&7You have recieved the &dViper &7Kit.");
+                        plugin.kit.put(player.getUniqueId(), "Viper");
                         plugin.potion.remove(player.getUniqueId());
                         plugin.urgal.remove(player.getUniqueId());
                         plugin.switcher.remove(player.getUniqueId());
                         plugin.stomper.remove(player.getUniqueId());
                         plugin.kangaroo.remove(player.getUniqueId());
-                        plugin.ninja.add(player.getUniqueId());
+                        plugin.ninja.remove(player.getUniqueId());
                         plugin.snowman.remove(player.getUniqueId());
                         plugin.thor.remove(player.getUniqueId());
-                        plugin.viper.remove(player.getUniqueId());
+                        plugin.viper.add(player.getUniqueId());
                     }
                 }
             }

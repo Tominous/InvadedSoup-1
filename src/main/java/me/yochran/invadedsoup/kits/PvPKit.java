@@ -51,6 +51,9 @@ public class PvPKit implements Listener {
                     plugin.stomper.remove(player.getUniqueId());
                     plugin.kangaroo.remove(player.getUniqueId());
                     plugin.ninja.remove(player.getUniqueId());
+                    plugin.snowman.remove(player.getUniqueId());
+                    plugin.thor.remove(player.getUniqueId());
+                    plugin.viper.remove(player.getUniqueId());
                 }
             }
         }

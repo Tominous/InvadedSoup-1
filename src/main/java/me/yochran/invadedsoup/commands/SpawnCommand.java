@@ -41,7 +41,7 @@ public class SpawnCommand implements CommandExecutor {
                     Inventory playerInv = player.getInventory();
                     ItemStack kitSelector = XMaterial.NETHER_STAR.parseItem();
                     ItemStack help = XMaterial.PAPER.parseItem();
-                    ItemStack settings = XMaterial.BOOK.parseItem();
+                    ItemStack settings = XMaterial.CLOCK.parseItem();
 
                     ItemMeta kitSelectorName = kitSelector.getItemMeta();
                     ItemMeta settingsName = settings.getItemMeta();
@@ -68,6 +68,9 @@ public class SpawnCommand implements CommandExecutor {
                     plugin.switcher.remove(player.getUniqueId());
                     plugin.kangaroo.remove(player.getUniqueId());
                     plugin.ninja.remove(player.getUniqueId());
+                    plugin.snowman.remove(player.getUniqueId());
+                    plugin.thor.remove(player.getUniqueId());
+                    plugin.viper.remove(player.getUniqueId());
                 } else {
                     Utils.sendMessage(player, "&7You will be teleported to spawn in &b5 seconds&7.");
                     Location location = player.getLocation();

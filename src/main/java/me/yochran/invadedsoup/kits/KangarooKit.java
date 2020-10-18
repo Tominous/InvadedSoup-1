@@ -61,6 +61,9 @@ public class KangarooKit implements Listener {
                         plugin.stomper.remove(player.getUniqueId());
                         plugin.kangaroo.add(player.getUniqueId());
                         plugin.ninja.remove(player.getUniqueId());
+                        plugin.snowman.remove(player.getUniqueId());
+                        plugin.thor.remove(player.getUniqueId());
+                        plugin.viper.remove(player.getUniqueId());
                     }
                 }
             }

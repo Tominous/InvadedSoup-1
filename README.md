@@ -4,6 +4,10 @@ A replica of InvadedLand's soup core.
 # Note
 This plugin is NOT complete. Once it is done (and after I get MegaPvP's permission), I will release this plugin to the public. Until then, it remains open source and incomplete, until of course I finish it.
 
+### Dependancies:
+  - WorldGuard (5.7 or higher)
+  - FastAsyncWorldEdit (Any version should work, 1.8.8 spigot version works best.)
+
 # Features
 
 ### Current Kits:

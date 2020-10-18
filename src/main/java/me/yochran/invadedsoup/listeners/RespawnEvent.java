@@ -38,10 +38,8 @@ public class RespawnEvent implements Listener {
         event.getDrops().clear();
         World world = player.getWorld();
         ItemStack soupItem = XMaterial.MUSHROOM_STEW.parseItem();
-        if (player.getInventory().contains(XMaterial.MUSHROOM_STEW.parseItem())) {
-            for (ItemStack soup : player.getInventory().getContents()) {
-                world.dropItemNaturally(player.getLocation(), soupItem);
-            }
+        for (ItemStack soup : player.getInventory().getContents()) {
+            world.dropItemNaturally(player.getLocation(), soupItem);
         }
     }
 

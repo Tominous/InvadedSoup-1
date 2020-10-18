@@ -28,6 +28,7 @@ ToggleOffSounds: "&cYou have disabled messaging sounds."
 # Spawn Information
 
 Spawn:
+  PreventLeaveWithoutKit: false
   world: world
   x: 0.5
   y: 70

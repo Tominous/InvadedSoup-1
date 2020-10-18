@@ -30,7 +30,7 @@ public class ThorAbility implements Listener {
                         if (player.getLocation().distanceSquared(entity.getLocation()) < 50) {
                             if (entity instanceof Player) {
                                 Player damaged = (Player) entity;
-                                if (damaged.getUniqueId() != player.getUniqueId()) {
+                                if (damaged != player) {
                                     Location entLoc = damaged.getLocation();
                                     damaged.getWorld().strikeLightning(entLoc);
                                     plugin.thor_cooldown.put(player.getUniqueId(), 15.0);

@@ -33,7 +33,7 @@ public class MsgCommand implements CommandExecutor {
                         if (plugin.tpm.contains(player.getUniqueId())) {
                             Utils.sendMessage(player, plugin.getConfig().getString("MsgPlayerTpm"));
                         } else if (plugin.tpm.contains(target.getUniqueId())) {
-                            Utils.sendMessage(player, plugin.getConfig().getString("MsgTargetTpm"));
+                            Utils.sendMessage(player, plugin.getConfig().getString("MsgTargetTpm").replaceAll("%player%", target.getName()));
                         } else {
                             String str = "";
                             for (int i = 1; i < args.length; i++) {

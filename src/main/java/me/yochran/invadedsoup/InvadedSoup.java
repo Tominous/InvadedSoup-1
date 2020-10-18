@@ -55,6 +55,7 @@ public final class InvadedSoup extends JavaPlugin {
     public HashMap<UUID, Integer> X = new HashMap<>();
     public HashMap<UUID, Integer> Z = new HashMap<>();
     public HashMap<String, String> reply = new HashMap<>();
+    public HashMap<UUID, Double> refill = new HashMap<>();
 
     // HashMaps (Kits)
     public HashMap<UUID, String> kit = new HashMap<>();
@@ -103,6 +104,7 @@ public final class InvadedSoup extends JavaPlugin {
         getCommand("togglemessages").setExecutor(new ToggleMessages());
         getCommand("toggleglobalchat").setExecutor(new ToggleGlobalChat());
         getCommand("togglemessagesounds").setExecutor(new ToggleMessageSounds());
+        getCommand("refill").setExecutor(new RefillCommand());
     }
 
     private void registerEvents() {
@@ -152,5 +154,6 @@ public final class InvadedSoup extends JavaPlugin {
         new KangarooCooldown().runTaskTimer(this, 0, 5);
         new NinjaCooldown().runTaskTimer(this, 0, 20);
         new ThorCooldown().runTaskTimer(this, 0, 20);
+        new RefillRunnable().runTaskTimer(this, 0, 20);
     }
 }

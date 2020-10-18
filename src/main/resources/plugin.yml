@@ -40,3 +40,6 @@ commands:
     description: Toggle on or off messaging sounds.
     usage: /<command>
     aliases: [tms, togglesounds, ts]
+  Refill:
+    description: Refill your current inventory with soups or potions.
+    usage: /<command>

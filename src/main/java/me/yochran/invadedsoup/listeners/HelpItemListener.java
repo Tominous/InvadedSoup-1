@@ -22,9 +22,7 @@ public class HelpItemListener implements Listener {
                 Utils.sendMessage(player, "&6PVP&7, &6Potion&7, &6Archer&7, &6Grandpa&7, &6Switcher&7, &6Urgal&7, &6Sonic&7, &6Viking &7and &6Stomper");
                 Utils.sendMessage(player, "&7You can also purchase &6enchantments&7, &6items &7and &6kits &7using money by typing &6/shop&7.");
                 Utils.liner(player);
-                Utils.sendMessage(player, "&7The &6/refill &7command re-applies your current kit to you at the cost of &6$250&7.");
-                Utils.sendMessage(player, "&7Using this, you can repair your armor, weapon, and refill your soups while you're in the pvp zone.");
-                Utils.sendMessage(player, "&7You can gain money by killing other players in pvp, or during hosted &6events.");
+                Utils.sendMessage(player, "&7The &6/refill &7command refills your inventory with soups&7.");
                 Utils.liner(player);
                 Utils.sendMessage(player, "&7Every kit gets an inventory full of &6mushroom soup&7.");
                 Utils.sendMessage(player, "&7Right clicking the &6mushroom soup &7heals your health by");

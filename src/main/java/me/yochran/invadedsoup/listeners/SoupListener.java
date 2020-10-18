@@ -1,7 +1,10 @@
 package me.yochran.invadedsoup.listeners;
 
 import me.yochran.invadedsoup.InvadedSoup;
+import me.yochran.invadedsoup.utils.Utils;
 import me.yochran.invadedsoup.utils.XMaterial;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -36,7 +39,6 @@ public class SoupListener implements Listener {
                 player.setHealth(newHealth);
                 int slot = player.getInventory().getHeldItemSlot();
                 player.getInventory().getItem(slot).setType(Material.BOWL);
-                player.updateInventory();
             }
         }
     }
@@ -53,7 +55,6 @@ public class SoupListener implements Listener {
                 player.setHealth(newHealth);
                 int slot = player.getInventory().getHeldItemSlot();
                 player.getInventory().getItem(slot).setType(Material.BOWL);
-                player.updateInventory();
             }
         }
     }
@@ -71,53 +72,123 @@ public class SoupListener implements Listener {
                     player.setHealth(newHealth);
                     int slot = player.getInventory().getHeldItemSlot();
                     player.getInventory().getItem(slot).setType(Material.BOWL);
-                    player.updateInventory();
                 }
             }
         }
     }
 
     @EventHandler
-    public void onDrop(PlayerDropItemEvent event) {
+    public void dropitem(PlayerDropItemEvent event){
         Player player = event.getPlayer();
         Item item = event.getItemDrop();
-        Material type = event.getItemDrop().getItemStack().getType();
-        if (plugin.kit.containsKey(player.getUniqueId())) {
-            if (!plugin.dropsOn.contains(player.getUniqueId())) {
-                if (type == XMaterial.DIAMOND_HELMET.parseMaterial() || type == XMaterial.GOLDEN_HELMET.parseMaterial() || type == XMaterial.CHAINMAIL_HELMET.parseMaterial() || type == XMaterial.IRON_HELMET.parseMaterial() || type == XMaterial.LEATHER_HELMET.parseMaterial()) {
-                    player.getInventory().setHelmet(item.getItemStack());
-                    event.getItemDrop().remove();
-                } else if (type == XMaterial.DIAMOND_CHESTPLATE.parseMaterial() || type == XMaterial.GOLDEN_CHESTPLATE.parseMaterial() || type == XMaterial.CHAINMAIL_CHESTPLATE.parseMaterial() || type == XMaterial.IRON_CHESTPLATE.parseMaterial() || type == XMaterial.LEATHER_CHESTPLATE.parseMaterial()) {
-                    player.getInventory().setChestplate(item.getItemStack());
-                    event.getItemDrop().remove();
-                } else if (type == XMaterial.DIAMOND_LEGGINGS.parseMaterial() || type == XMaterial.GOLDEN_LEGGINGS.parseMaterial() || type == XMaterial.CHAINMAIL_LEGGINGS.parseMaterial() || type == XMaterial.IRON_LEGGINGS.parseMaterial()|| type == XMaterial.LEATHER_LEGGINGS.parseMaterial()) {
-                    player.getInventory().setLeggings(item.getItemStack());
-                    event.getItemDrop().remove();
-                } else if (type == XMaterial.DIAMOND_BOOTS.parseMaterial() || type == XMaterial.GOLDEN_BOOTS.parseMaterial() || type == XMaterial.CHAINMAIL_BOOTS.parseMaterial() || type == XMaterial.IRON_BOOTS.parseMaterial() || type == XMaterial.LEATHER_BOOTS.parseMaterial()) {
-                    player.getInventory().setBoots(item.getItemStack());
-                    event.getItemDrop().remove();
-                } else {
-                    if (type == XMaterial.BOWL.parseMaterial()) {
-                        event.getItemDrop().remove();
-                    } else {
-                        event.setCancelled(true);
-                    }
-                }
-                player.updateInventory();
-            } else {
-                if (type == XMaterial.MUSHROOM_STEW.parseMaterial()) {
-                    return;
-                } else {
-                    event.getItemDrop().remove();
-                }
-            }
+        if (!Utils.regionLeave(player)) {
+            event.setCancelled(true);
+            player.updateInventory();
         } else {
-            File file = new File(plugin.getDataFolder(), "config.yml");
-            FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-            String worldname = config.getString("Spawn.world");
-            if (player.getWorld().getName().equalsIgnoreCase(worldname)) {
+            Material type = item.getItemStack().getType();
+            if (type == XMaterial.MUSHROOM_STEW.parseMaterial() || type == Material.POTION) {
+                if (plugin.dropsOn.contains(player.getUniqueId())) {
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        item.remove();
+                        player.updateInventory();
+                    }, 20 * 10);
+                } else {
+                    event.setCancelled(true);
+                    player.updateInventory();
+                    return;
+                }
+            } else if (type == XMaterial.SNOWBALL.parseMaterial() || type == XMaterial.FIREWORK_ROCKET.parseMaterial()) {
                 event.setCancelled(true);
                 player.updateInventory();
+            } else {
+                switch (type){
+                    case BOWL: {
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                            item.remove();
+                            player.updateInventory();
+                        }, 0);
+                        return;
+                    }
+                    case FIREWORK_ROCKET:{
+                        if (plugin.kangaroo.contains(player.getUniqueId())) {
+                            event.setCancelled(true);
+                            player.updateInventory();
+                            return;
+                        }
+                    }
+                    case CLOCK:{
+                        if (player.getWorld().getName().equalsIgnoreCase(plugin.getConfig().getString("Spawn.world"))){
+                            event.setCancelled(true);
+                            player.updateInventory();
+                            return;
+                        }
+                    }
+                    case NETHER_STAR:{
+                        if (item.getItemStack().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Kit Selector")){
+                            event.setCancelled(true);
+                            player.updateInventory();
+                            return;
+                        }
+                    }
+                    case PAPER:{
+                        if (item.getItemStack().getItemMeta().getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', "&6Help &7(Right Click)"))){
+                            event.setCancelled(true);
+                            player.updateInventory();
+                            return;
+                        }
+                    }
+                    case STONE_SWORD:
+                    case DIAMOND_SWORD:
+                    case IRON_SWORD:
+                    case DIAMOND_AXE:
+                    case IRON_AXE:
+                    case BOW:
+                    case ARROW:
+                    case FISHING_ROD:{
+                        event.setCancelled(true);
+                        player.updateInventory();
+                        return;
+                    }
+                    case DIAMOND_HELMET:
+                    case CHAINMAIL_HELMET:
+                    case GOLDEN_HELMET:
+                    case IRON_HELMET:
+                    case LEATHER_HELMET:{
+                        player.getInventory().setHelmet(item.getItemStack());
+                        player.updateInventory();
+                        item.remove();
+                        return;
+                    }
+                    case CHAINMAIL_CHESTPLATE:
+                    case DIAMOND_CHESTPLATE:
+                    case GOLDEN_CHESTPLATE:
+                    case IRON_CHESTPLATE:
+                    case LEATHER_CHESTPLATE:{
+                        player.getInventory().setChestplate(item.getItemStack());
+                        player.updateInventory();
+                        item.remove();
+                        return;
+                    }
+                    case LEATHER_LEGGINGS:
+                    case CHAINMAIL_LEGGINGS:
+                    case DIAMOND_LEGGINGS:
+                    case GOLDEN_LEGGINGS:
+                    case IRON_LEGGINGS:{
+                        player.getInventory().setLeggings(item.getItemStack());
+                        player.updateInventory();
+                        item.remove();
+                        return;
+                    }
+                    case CHAINMAIL_BOOTS:
+                    case DIAMOND_BOOTS:
+                    case GOLDEN_BOOTS:
+                    case IRON_BOOTS:
+                    case LEATHER_BOOTS:{
+                        player.getInventory().setBoots(item.getItemStack());
+                        player.updateInventory();
+                        item.remove();
+                    }
+                }
             }
         }
     }

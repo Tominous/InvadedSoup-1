@@ -10,6 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class ArcherKit implements Listener {
 
@@ -51,9 +53,13 @@ public class ArcherKit implements Listener {
 
                     Utils.sendMessage(player, "&7You have recieved the &bArcher &7Kit.");
                     plugin.kit.put(player.getUniqueId(), "Archer");
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000000, 0));
                     plugin.potion.remove(player.getUniqueId());
                     plugin.urgal.remove(player.getUniqueId());
                     plugin.switcher.remove(player.getUniqueId());
+                    plugin.stomper.remove(player.getUniqueId());
+                    plugin.kangaroo.remove(player.getUniqueId());
+                    plugin.ninja.remove(player.getUniqueId());
                 }
             }
         }

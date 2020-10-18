@@ -51,6 +51,9 @@ public class SonicKit implements Listener {
                     plugin.potion.remove(player.getUniqueId());
                     plugin.urgal.remove(player.getUniqueId());
                     plugin.switcher.remove(player.getUniqueId());
+                    plugin.stomper.remove(player.getUniqueId());
+                    plugin.kangaroo.remove(player.getUniqueId());
+                    plugin.ninja.remove(player.getUniqueId());
                 }
             }
         }

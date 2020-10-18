@@ -103,7 +103,7 @@ public class KitSelector implements Listener {
                 sonicLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
                 sonicLore.add(Utils.guiSpacer());
                 sonicLore.add(ChatColor.translateAlternateColorCodes('&', "&7Gives you speed so you can"));
-                sonicLore.add(ChatColor.translateAlternateColorCodes('&', "&run circles around your enemies"));
+                sonicLore.add(ChatColor.translateAlternateColorCodes('&', "&7run circles around your enemies"));
 
                 ArrayList<String> vikingLore = new ArrayList<>();
                 vikingLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
@@ -118,34 +118,58 @@ public class KitSelector implements Listener {
                 stomperLore.add(ChatColor.translateAlternateColorCodes('&', "&7not be affected as much."));
 
                 ArrayList<String> fishermanLore = new ArrayList<>();
-                fishermanLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                if (player.hasPermission("soup.kits.fisherman")) {
+                    fishermanLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                } else {
+                    fishermanLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &cNot owned."));
+                }
                 fishermanLore.add(Utils.guiSpacer());
                 fishermanLore.add(ChatColor.translateAlternateColorCodes('&', "&7Pull players to you after hooking them."));
 
                 ArrayList<String> kangarooLore = new ArrayList<>();
-                kangarooLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                if (player.hasPermission("soup.kits.kangaroo")) {
+                    kangarooLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                } else {
+                    kangarooLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &cNot owned."));
+                }
                 kangarooLore.add(Utils.guiSpacer());
                 kangarooLore.add(ChatColor.translateAlternateColorCodes('&', "&7Leap higher by clicking your firework rocket,"));
                 kangarooLore.add(ChatColor.translateAlternateColorCodes('&', "&7leap further while shifting."));
 
                 ArrayList<String> snowmanLore = new ArrayList<>();
-                snowmanLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                if (player.hasPermission("soup.kits.snowman")) {
+                    snowmanLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                } else {
+                    snowmanLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &cNot owned."));
+                }
                 snowmanLore.add(Utils.guiSpacer());
                 snowmanLore.add(ChatColor.translateAlternateColorCodes('&', "&7Horrify your enemies by shooting snowballs at them."));
 
                 ArrayList<String> thorLore = new ArrayList<>();
-                thorLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                if (player.hasPermission("soup.kits.thor")) {
+                    thorLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                } else {
+                    thorLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &cNot owned."));
+                }
                 thorLore.add(Utils.guiSpacer());
                 thorLore.add(ChatColor.translateAlternateColorCodes('&', "&7Smite your enemies."));
 
                 ArrayList<String> viperLore = new ArrayList<>();
-                viperLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                if (player.hasPermission("soup.kits.viper")) {
+                    viperLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                } else {
+                    viperLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &cNot owned."));
+                }
                 viperLore.add(Utils.guiSpacer());
                 viperLore.add(ChatColor.translateAlternateColorCodes('&', "&7Your enemies have a chance to"));
                 viperLore.add(ChatColor.translateAlternateColorCodes('&', "&7recieve poison after you attack them."));
 
                 ArrayList<String> ninjaLore = new ArrayList<>();
-                ninjaLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                if (player.hasPermission("soup.kits.ninja")) {
+                    ninjaLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &aOwned"));
+                } else {
+                    ninjaLore.add(ChatColor.translateAlternateColorCodes('&', "&7Availability: &cNot owned."));
+                }
                 ninjaLore.add(Utils.guiSpacer());
                 ninjaLore.add(ChatColor.translateAlternateColorCodes('&', "&7Hit your enemies and shift in front"));
                 ninjaLore.add(ChatColor.translateAlternateColorCodes('&', "&7of them to teleport behind them."));

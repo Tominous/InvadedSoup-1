@@ -34,7 +34,7 @@ public class SwitcherAbility implements Listener {
     @EventHandler
     public void onSnowball(PlayerInteractEvent event){
         Player player = event.getPlayer();
-        if (event.getAction() == Action.RIGHT_CLICK_AIR){
+        if (event.getAction() == Action.RIGHT_CLICK_AIR) {
             if (event.getItem() == null || event.getItem().getType() == Material.AIR)return;
 
             if (event.getItem().getType() == XMaterial.SNOWBALL.parseMaterial()) {
@@ -50,7 +50,7 @@ public class SwitcherAbility implements Listener {
         }
     }
     @EventHandler
-    public void land(ProjectileHitEvent event){
+    public void onLand(ProjectileHitEvent event){
         Projectile projectile = event.getEntity();
         if (projectile instanceof Snowball){
             Player thrower = (Player) projectile.getShooter();
@@ -65,8 +65,7 @@ public class SwitcherAbility implements Listener {
 
     @EventHandler
     public void snowballHit(EntityDamageByEntityEvent event){
-        new BukkitRunnable(){
-
+        new BukkitRunnable() {
             @Override
             public void run() {
                 if (event.isCancelled()) return;
@@ -74,13 +73,17 @@ public class SwitcherAbility implements Listener {
                     if (event.getDamager() instanceof Snowball) {
                         Player thrower = (Player) ((Snowball) event.getDamager()).getShooter();
                         Player hit = (Player) event.getEntity();
-                        if (plugin.switcher.contains(thrower.getUniqueId())) {
-                            Location hitLocation = hit.getLocation();
-                            Location throwerLocation = thrower.getLocation();
-                            thrower.teleport(hitLocation);
-                            hit.teleport(throwerLocation);
-                            Utils.sendMessage(hit, "&aYou have been switched!");
-                            Utils.sendMessage(thrower, "&aYou have switched with " + hit.getName() + "&a!");
+                        if (!Utils.regionLeave(hit)) {
+                            event.setCancelled(true);
+                        } else {
+                            if (plugin.switcher.contains(thrower.getUniqueId())) {
+                                Location hitLocation = hit.getLocation();
+                                Location throwerLocation = thrower.getLocation();
+                                thrower.teleport(hitLocation);
+                                hit.teleport(throwerLocation);
+                                Utils.sendMessage(hit, "&aYou have been switched!");
+                                Utils.sendMessage(thrower, "&aYou have switched with " + hit.getName() + "&a!");
+                            }
                         }
                     }
                 }

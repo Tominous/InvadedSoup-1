@@ -66,14 +66,16 @@ public class SpawnCommand implements CommandExecutor {
                     plugin.potion.remove(player.getUniqueId());
                     plugin.urgal.remove(player.getUniqueId());
                     plugin.switcher.remove(player.getUniqueId());
+                    plugin.kangaroo.remove(player.getUniqueId());
+                    plugin.ninja.remove(player.getUniqueId());
                 } else {
                     Utils.sendMessage(player, "&7You will be teleported to spawn in &b5 seconds&7.");
                     Location location = player.getLocation();
-                    double X = location.getBlockX();
-                    double Z = location.getBlockZ();
+                    int X = location.getBlockX();
+                    int Z = location.getBlockZ();
                     plugin.X.put(player.getUniqueId(), X);
                     plugin.Z.put(player.getUniqueId(), Z);
-                    plugin.spawn.put(player.getUniqueId(), 5);
+                    plugin.spawn.put(player.getUniqueId(), 5.0);
                 }
             }
         }

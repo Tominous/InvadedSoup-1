@@ -54,6 +54,9 @@ public class UrgalKit implements Listener {
                     plugin.urgal.add(player.getUniqueId());
                     plugin.switcher.remove(player.getUniqueId());
                     plugin.potion.remove(player.getUniqueId());
+                    plugin.stomper.remove(player.getUniqueId());
+                    plugin.kangaroo.remove(player.getUniqueId());
+                    plugin.ninja.remove(player.getUniqueId());
                 }
             }
         }

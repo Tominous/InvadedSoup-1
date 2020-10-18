@@ -30,8 +30,9 @@ public class SpawnRunnable extends BukkitRunnable {
             if (plugin.spawn.containsKey(onlinePlayers.getUniqueId())) {
                 plugin.spawn.put(onlinePlayers.getUniqueId(), plugin.spawn.get(onlinePlayers.getUniqueId()) - 1);
                 Location location = onlinePlayers.getLocation();
-                double X = location.getBlockX();
-                double Z = location.getBlockZ();
+                int X = location.getBlockX();
+                int Z = location.getBlockZ();
+
                 if (X != plugin.X.get(onlinePlayers.getUniqueId())) {
                     plugin.spawn.remove(onlinePlayers.getUniqueId());
                     plugin.X.remove(onlinePlayers.getUniqueId());
@@ -45,11 +46,13 @@ public class SpawnRunnable extends BukkitRunnable {
                     plugin.Z.remove(onlinePlayers.getUniqueId());
                     Utils.sendMessage(onlinePlayers, "&7Spawn teleportation cancelled.");
                 }
-                int time = plugin.spawn.get(onlinePlayers.getUniqueId());
-                if (time <= 0) {
+                double time = plugin.spawn.get(onlinePlayers.getUniqueId());
+
+                if (time <= 0.0) {
                     plugin.spawn.remove(onlinePlayers.getUniqueId());
                     plugin.X.remove(onlinePlayers.getUniqueId());
                     plugin.Z.remove(onlinePlayers.getUniqueId());
+                    plugin.kangaroo.remove(onlinePlayers.getUniqueId());
                     SpawnManagement spawn = new SpawnManagement(onlinePlayers);
                     spawn.tp();
                     onlinePlayers.getInventory().clear();
@@ -82,6 +85,9 @@ public class SpawnRunnable extends BukkitRunnable {
                     plugin.potion.remove(onlinePlayers.getUniqueId());
                     plugin.urgal.remove(onlinePlayers.getUniqueId());
                     plugin.switcher.remove(onlinePlayers.getUniqueId());
+                    plugin.stomper.remove(onlinePlayers.getUniqueId());
+                    plugin.kangaroo.remove(onlinePlayers.getUniqueId());
+                    plugin.ninja.remove(onlinePlayers.getUniqueId());
                 }
             }
         }

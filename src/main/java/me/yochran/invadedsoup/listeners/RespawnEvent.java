@@ -52,6 +52,9 @@ public class RespawnEvent implements Listener {
         plugin.switcher.remove(player.getUniqueId());
         plugin.urgal.remove(player.getUniqueId());
         plugin.potion.remove(player.getUniqueId());
+        plugin.stomper.remove(player.getUniqueId());
+        plugin.kangaroo.remove(player.getUniqueId());
+        plugin.ninja.remove(player.getUniqueId());
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             SpawnManagement respawn = new SpawnManagement(player);
             respawn.tp();

@@ -1,5 +1,6 @@
 package me.yochran.invadedsoup.listeners;
 
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import me.yochran.invadedsoup.InvadedSoup;
 import me.yochran.invadedsoup.management.SpawnManagement;
 import me.yochran.invadedsoup.utils.Utils;
@@ -8,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.Inventory;
@@ -25,7 +27,7 @@ public class SpawnLeaveEvent implements Listener {
         plugin = InvadedSoup.getPlugin(InvadedSoup.class);
     }
 
-    @EventHandler
+    @EventHandler (priority = EventPriority.HIGH)
     public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         String worldname = plugin.getConfig().getString("Spawn.world");

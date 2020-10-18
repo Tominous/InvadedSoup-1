@@ -10,10 +10,6 @@ commands:
     description: Get all subcommands for the soup core
     usage: /<command>
     aliases: [invadedsoup, soupcore, core]
-  Setsoupspawn:
-    description: Set the spawnpoint for the soup core.
-    usage: /<command>
-    aliases: setspawn
   Help:
     description: Gets the soup cores help for normal players.
     usage: /<command>

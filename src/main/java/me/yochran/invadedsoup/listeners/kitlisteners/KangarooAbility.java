@@ -26,6 +26,33 @@ public class KangarooAbility implements Listener {
         if (player.getInventory().getItemInHand().getType() == XMaterial.FIREWORK_ROCKET.parseMaterial()) {
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 event.setCancelled(true);
+                if (player.getInventory().getItemInHand().getType() == XMaterial.FIREWORK_ROCKET.parseMaterial()) {
+                    if (plugin.kangaroo.contains(player.getUniqueId())) {
+                        if (plugin.kang_cooldown.containsKey(player.getUniqueId())) {
+                            return;
+                        } else {
+                            if (player.isSneaking()) {
+                                double X = player.getLocation().getDirection().getX() * 4.0;
+                                double Z = player.getLocation().getDirection().getZ() * 4.0;
+                                double height = 3.5;
+                                org.bukkit.util.Vector unitVector = new org.bukkit.util.Vector(X, height, Z);
+                                unitVector = unitVector.normalize();
+                                player.setVelocity(unitVector.multiply(1.35));
+                                plugin.kang_cooldown.put(player.getUniqueId(), 0.75);
+                                player.setSprinting(true);
+                            } else {
+                                double X = player.getLocation().getDirection().getX();
+                                double Z = player.getLocation().getDirection().getZ();
+                                double height = 3.0;
+                                org.bukkit.util.Vector unitVector = new org.bukkit.util.Vector(X, height, Z);
+                                unitVector = unitVector.normalize();
+                                player.setVelocity(unitVector.multiply(1.35));
+                                plugin.kang_cooldown.put(player.getUniqueId(), 1.0);
+                                player.setSprinting(true);
+                            }
+                        }
+                    }
+                }
             } else {
                 if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_AIR) {
                     if (player.getInventory().getItemInHand().getType() == XMaterial.FIREWORK_ROCKET.parseMaterial()) {
@@ -40,7 +67,8 @@ public class KangarooAbility implements Listener {
                                     org.bukkit.util.Vector unitVector = new org.bukkit.util.Vector(X, height, Z);
                                     unitVector = unitVector.normalize();
                                     player.setVelocity(unitVector.multiply(1.35));
-                                    plugin.kang_cooldown.put(player.getUniqueId(), 0.5);
+                                    plugin.kang_cooldown.put(player.getUniqueId(), 0.75);
+                                    player.setSprinting(true);
                                 } else {
                                     double X = player.getLocation().getDirection().getX();
                                     double Z = player.getLocation().getDirection().getZ();
@@ -48,7 +76,8 @@ public class KangarooAbility implements Listener {
                                     org.bukkit.util.Vector unitVector = new org.bukkit.util.Vector(X, height, Z);
                                     unitVector = unitVector.normalize();
                                     player.setVelocity(unitVector.multiply(1.35));
-                                    plugin.kang_cooldown.put(player.getUniqueId(), 1.5);
+                                    plugin.kang_cooldown.put(player.getUniqueId(), 1.0);
+                                    player.setSprinting(true);
                                 }
                             }
                         }

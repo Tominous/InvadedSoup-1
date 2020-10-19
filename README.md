@@ -2,7 +2,7 @@
 A replica of InvadedLand's soup core.
 
 # Note
-This plugin has been completed! If I do not recieve a response from MegaPvP (or luke/hyper) in a few days, I will release this plugin onto spigot and mc-market.
+This plugin has been completed!
 
 ### Dependancies:
   - WorldGuard (5.7 or higher)
